@@ -16,11 +16,11 @@ for (let i = 0; i<10; i++){
     console.log(i)
 }
 
-let i = "camila"
+let i = "javier"
 console.log(i);
 
 const miarray = [];
-miarray [0] = ["camila y morat"];
+miarray [0] = ["javier y javier"];
     console.log(miarray);
 
 const frutas = ["Platano"];
