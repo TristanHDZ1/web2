@@ -1,5 +1,3 @@
-//aqui ira el http que muestre un texto plano
-
 const http = require('http');
 const port = 3026;
 const server = http.createServer((req, res) => {
