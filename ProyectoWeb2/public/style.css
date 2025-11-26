@@ -1,0 +1,303 @@
+/* =========================================
+   ESTILOS GENERALES Y RESET
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #050505;
+    color: white;
+    min-height: 100vh;
+    /* Fondo sutil general */
+    background-image: radial-gradient(circle at 10% 20%, rgba(0, 255, 135, 0.1) 0%, transparent 20%),
+                      radial-gradient(circle at 90% 80%, rgba(96, 239, 255, 0.1) 0%, transparent 20%);
+}
+
+/* Clases específicas para el cuerpo de la página */
+body.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 100vh;
+}
+
+body.dashboard-page {
+    padding: 20px;
+}
+
+/* =========================================
+   COMPONENTES UI (Tarjetas, Inputs, Botones)
+   ========================================= */
+
+/* Tarjeta Glassmorphism */
+.glass-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Ajustes específicos de tarjeta para Auth vs Panel */
+.auth-card {
+    max-width: 400px;
+    text-align: center;
+}
+
+.panel-card {
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+/* Tipografía */
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.auth-card h1 {
+    background: linear-gradient(to right, #fff, #aaa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h3 {
+    margin-bottom: 20px;
+    color: #ccc;
+    font-weight: 400;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+}
+
+p.subtitle {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 40px;
+}
+
+/* Inputs */
+.input-group, .input-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-left: 15px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 15px 20px;
+    border-radius: 50px; /* Píldora */
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.panel-card input {
+    border-radius: 10px; /* Inputs del panel menos redondos */
+    padding: 12px 15px;
+}
+
+input:focus {
+    border-color: #60efff;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(96, 239, 255, 0.2);
+}
+
+/* Botones Principales (Submit / Add) */
+.btn-submit, .btn-add {
+    width: 100%;
+    padding: 15px;
+    border-radius: 50px;
+    border: none;
+    background: linear-gradient(90deg, #00ff87 0%, #60efff 100%);
+    color: #000;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-add {
+    border-radius: 10px; /* Botón del panel menos redondo */
+    padding: 12px 20px;
+    margin-top: 0;
+    font-size: 1rem;
+}
+
+.btn-submit:hover, .btn-add:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(96, 239, 255, 0.4);
+}
+
+/* Alertas */
+.alert-error {
+    background: rgba(255, 77, 77, 0.2);
+    border: 1px solid rgba(255, 77, 77, 0.5);
+    color: #ff4d4d;
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* =========================================
+   ELEMENTOS ESPECÍFICOS DE LOGIN/REGISTER
+   ========================================= */
+.background-glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(180deg, #00ff87 0%, #60efff 100%);
+    filter: blur(150px);
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.4;
+    transform: translate(-50%, -50%);
+}
+
+.glow-login { top: 10%; left: 50%; }
+.glow-register { bottom: 10%; right: 20%; }
+
+.divider {
+    display: flex;
+    align-items: center;
+    color: #444;
+    margin: 30px 0;
+    font-size: 0.8rem;
+}
+.divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #333;
+}
+.divider span { padding: 0 10px; }
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 20px;
+    border-radius: 50px;
+    color: #ccc;
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: 0.3s;
+    font-size: 0.9rem;
+}
+.social-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: #fff; color: #fff; }
+.social-icon { font-size: 1.2rem; }
+
+.auth-link {
+    margin-top: 30px;
+    font-size: 0.85rem;
+    color: #666;
+    text-align: center;
+}
+.auth-link a { color: #00ff87; text-decoration: none; font-weight: 600; }
+
+/* =========================================
+   ELEMENTOS ESPECÍFICOS DEL PANEL (DASHBOARD)
+   ========================================= */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 30px;
+}
+
+.user-info h1 { font-size: 1.5rem; font-weight: 600; color: white; background: none; -webkit-text-fill-color: white;}
+.user-info span { color: #00ff87; }
+
+.btn-logout {
+    text-decoration: none;
+    color: #ff4d4d;
+    border: 1px solid rgba(255, 77, 77, 0.3);
+    padding: 8px 20px;
+    border-radius: 30px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+.btn-logout:hover { background: rgba(255, 77, 77, 0.1); border-color: #ff4d4d; }
+
+.add-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    align-items: end;
+}
+
+/* Tabla */
+.table-container { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 600px; }
+th { text-align: left; padding: 15px; color: #888; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.1); }
+td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle; }
+tbody tr:hover { background: rgba(255, 255, 255, 0.02); }
+
+/* Acciones de tabla */
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 5px;
+    margin-right: 5px;
+    transition: 0.2s;
+}
+.action-btn:hover { transform: scale(1.2); }
+.btn-edit-icon { color: #ffc107; }
+.btn-delete-icon { color: #ff4d4d; }
+.btn-save-icon { color: #00ff87; }
+.btn-cancel-icon { color: #ccc; }
+
+.edit-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.editing-row { background: rgba(255, 193, 7, 0.05) !important; }
+.empty-msg { text-align: center; color: #666; padding: 20px; }

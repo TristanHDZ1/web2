@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Persona</title>
+</head>
+<body>
+
+<h2>Editar Persona</h2>
+
+<form action="/updatePerson/<%= person.id %>" method="POST">
+    <input type="text" name="nombre" value="<%= person.nombre %>" required>
+    <input type="text" name="apellidos" value="<%= person.apellidos %>" required>
+    <input type="email" name="correo" value="<%= person.correo %>" required>
+    <input type="number" name="edad" value="<%= person.edad %>" required>
+    <button type="submit">Actualizar</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Panel Principal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="dashboard-page">
+
+    <header class="header">
+        <div class="user-info">
+            <h1>Hola, <span><%= user.username %></span></h1>
+        </div>
+        <a href="/logout" class="btn-logout">
+            <i class='bx bx-log-out'></i> Salir
+        </a>
+    </header>
+
+    <div class="glass-card panel-card">
+        <h3><i class='bx bx-user-plus'></i> Registrar Nueva Persona</h3>
+        <form action="/addPerson" method="POST" class="add-form">
+            <div class="input-wrapper">
+                <input type="text" name="nombre" placeholder="Nombre" required autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <input type="text" name="apellidos" placeholder="Apellidos" required autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <input type="email" name="correo" placeholder="Correo Electrónico" required autocomplete="off">
+            </div>
+            <div class="input-wrapper">
+                <input type="number" name="edad" placeholder="Edad" required>
+            </div>
+            <button type="submit" class="btn-add">Guardar</button>
+        </form>
+    </div>
+
+    <div class="glass-card panel-card">
+        <h3><i class='bx bx-list-ul'></i> Directorio de Personas</h3>
+        
+        <% if (people.length > 0) { %>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Correo</th>
+                            <th>Edad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% people.forEach((persona) => { %>
+                            
+                            <tr id="row-view-<%= persona.id %>">
+                                <td style="color: #666;">#<%= persona.id %></td>
+                                <td><%= persona.nombre %></td>
+                                <td><%= persona.apellidos %></td>
+                                <td><%= persona.correo %></td>
+                                <td><span style="background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 4px;"><%= persona.edad %></span></td>
+                                <td>
+                                    <button class="action-btn btn-edit-icon" onclick="activarEdicion('<%= persona.id %>')" title="Editar">
+                                        <i class='bx bx-pencil'></i>
+                                    </button>
+                                    
+                                    <a href="/deletePerson/<%= persona.id %>" onclick="return confirm('¿Estás seguro de eliminar a <%= persona.nombre %>?');" class="action-btn btn-delete-icon" title="Eliminar">
+                                        <i class='bx bx-trash'></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr id="row-edit-<%= persona.id %>" style="display: none;" class="editing-row">
+                                <form id="form-update-<%= persona.id %>" action="/updatePerson/<%= persona.id %>" method="POST"></form>
+
+                                <td><%= persona.id %></td> 
+                                
+                                <td><input type="text" name="nombre" value="<%= persona.nombre %>" form="form-update-<%= persona.id %>" class="edit-input" required></td>
+                                <td><input type="text" name="apellidos" value="<%= persona.apellidos %>" form="form-update-<%= persona.id %>" class="edit-input" required></td>
+                                <td><input type="email" name="correo" value="<%= persona.correo %>" form="form-update-<%= persona.id %>" class="edit-input" required></td>
+                                <td><input type="number" name="edad" value="<%= persona.edad %>" form="form-update-<%= persona.id %>" class="edit-input" style="width: 60px;" required></td>
+                                
+                                <td>
+                                    <button type="submit" class="action-btn btn-save-icon" form="form-update-<%= persona.id %>" title="Guardar Cambios">
+                                        <i class='bx bx-check-circle'></i>
+                                    </button>
+                                    
+                                    <button type="button" class="action-btn btn-cancel-icon" onclick="cancelarEdicion('<%= persona.id %>')" title="Cancelar">
+                                        <i class='bx bx-x-circle'></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        <% } else { %>
+            <div class="empty-msg">
+                <i class='bx bx-ghost' style="font-size: 2rem;"></i>
+                <p>No hay personas registradas aún.</p>
+            </div>
+        <% } %>
+    </div>
+
+    <script>
+        function activarEdicion(id) {
+            document.getElementById('row-view-' + id).style.display = 'none';
+            document.getElementById('row-edit-' + id).style.display = 'table-row';
+        }
+
+        function cancelarEdicion(id) {
+            document.getElementById('row-view-' + id).style.display = 'table-row';
+            document.getElementById('row-edit-' + id).style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>

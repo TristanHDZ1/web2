@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="auth-page">
+
+    <div class="background-glow glow-register"></div>
+
+    <div class="glass-card auth-card">
+        <h1>Crear Cuenta</h1>
+        <p class="subtitle">Únete a nosotros hoy mismo</p>
+
+        <% if (error) { %>
+            <div class="alert-error">
+                <i class='bx bxs-error-circle'></i> <%= error %>
+            </div>
+        <% } %>
+
+        <form action="/register" method="POST">
+            
+            <div class="input-group">
+                <label>Elige tu Usuario</label>
+                <input type="text" name="username" placeholder="Ej. juanperez" required autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <label>Define tu Contraseña</label>
+                <input type="password" name="password" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                Registrarse <i class='bx bx-user-plus'></i>
+            </button>
+        </form>
+
+        <div class="auth-link">
+            ¿Ya tienes cuenta? <a href="/login">Inicia Sesión</a>
+        </div>
+    </div>
+
+</body>
+</html>
