@@ -22,7 +22,7 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 
-// Conexion db
+//conexion
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -39,7 +39,7 @@ db.connect(err => {
     }
 });
 
-// Proteccion
+// proteccion
 function checkAuth(req, res, next) {
     if (!req.session.user) return res.redirect('/login');
     next();
@@ -49,7 +49,7 @@ app.get('/', (req, res) => {
     res.redirect('/login');
 });
 
-//Seccion de login
+//seccion de login
 app.get('/login', (req, res) => {
     res.render('login', { error: null });
 });
@@ -80,7 +80,7 @@ app.post('/login', (req, res) => {
     });
 });
 
-//Registro
+//registro
 app.get('/register', (req, res) => {
     res.render('register', { error: null });
 });
@@ -98,7 +98,7 @@ app.post('/register', async (req, res) => {
     });
 });
 
-//Panel principal
+//panel
 app.get('/panel', checkAuth, (req, res) => {
     db.query("SELECT * FROM personasTabla", (err, results) => {
         if(err) {
@@ -112,9 +112,11 @@ app.get('/panel', checkAuth, (req, res) => {
     });
 });
 
+
+
 //Seccion del CRUD
 
-//Crear
+//crear
 app.post('/addPerson', checkAuth, (req, res) => {
     const { nombre, apellidos, correo, edad } = req.body;
     const sql = "INSERT INTO personasTabla (nombre, apellidos, correo, edad) VALUES (?, ?, ?, ?)";
@@ -141,7 +143,7 @@ app.post('/updatePerson/:id', checkAuth, (req, res) => {
     });
 });
 
-//Eliminar
+//eliminar
 app.get('/deletePerson/:id', checkAuth, (req, res) => {
     db.query("DELETE FROM personasTabla WHERE id = ?", [req.params.id], (err) => {
         if(err) console.log(err);
@@ -149,14 +151,14 @@ app.get('/deletePerson/:id', checkAuth, (req, res) => {
     });
 });
 
-//Salir
+//salir
 app.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/login');
 });
 
 
-//Servidor
+//servidor
 const PORT = process.env.PORT || 3008;
 
 app.listen(PORT, () => {

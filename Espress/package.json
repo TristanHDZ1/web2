@@ -1,0 +1,15 @@
+{
+  "name": "espress",
+  "version": "1.0.0",
+  "description": "Proyecto de inicio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Javier",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

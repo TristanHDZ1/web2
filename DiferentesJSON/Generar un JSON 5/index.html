@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestor de Usuarios JSON</title>
+  <style>
+    table, th, td { border: 1px solid black; border-collapse: collapse; padding: 6px; }
+    th { background-color: #eee; }
+  </style>
+</head>
+<body>
+  <h2>Gestor de Usuarios desde JSON</h2>
+
+  <!-- Formulario para agregar usuario -->
+  <form id="formUsuario">
+    <input type="text" id="nombre" placeholder="Nombre" required>
+    <input type="email" id="correo" placeholder="Correo" required>
+    <button type="submit">Agregar Usuario</button>
+  </form>
+
+  <br>
+
+  <!-- Importar JSON -->
+  <input type="file" id="importarJSON" accept=".json">
+  <button id="descargar">Descargar JSON</button>
+
+  <h3>Lista de usuarios:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="tablaUsuarios"></tbody>
+  </table>
+
+
+</body>
+<script src="app.js"></script>
+</html>
